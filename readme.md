@@ -27,3 +27,7 @@ what is oparators and how it works
 what is comparition oparator and How it works? {==, ===}
 What is conditional oparator {if and ?} and How it works?
 
+
+what is for, for in, for of,while and do while loops in js?
+what is switch statement and How it works?
+
