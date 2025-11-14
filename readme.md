@@ -32,3 +32,5 @@ what is for, for in, for of,while and do while loops in js?
 what is switch statement and How it works?
 
 What is Hoisting and how it works?
+
+this, pototype, selfinvoke function, == &===, promise, 
