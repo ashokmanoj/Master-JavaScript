@@ -120,3 +120,91 @@ const fullname = employees.map((emp)=>
   emp.personalDetails.firstName + " " + emp.personalDetails.lastName
 );
 console.log("All Employees:", fullname);
+
+
+
+//✅ 1. Flatten Using Only Loops (NO recursion)
+
+//This method uses a stack and a while-loop, fully manual:
+
+let arr = [1, [2, [3, [4]]]];
+
+function flatten(array) {
+  let result = [];
+  let stack = [...array]; // copy input
+
+  while (stack.length > 0) {
+    let value = stack.pop();
+
+    if (Array.isArray(value)) {
+      // push items of the array back into stack
+      for (let i = value.length - 1; i >= 0; i--) {
+        stack.push(value[i]);
+      }
+    } else {
+      result.push(value);
+    }
+  }
+
+  // stack reverses order → reverse again
+  return result.reverse();
+}
+
+console.log(flatten(arr)); // [1, 2, 3, 4]
+
+//✅ 2. Flatten Using ES6 (Recursive, but clean)
+
+//No shortcuts — just recursion:
+
+let arr1 = [1, [2, [3, [4]]]];
+
+const flatten = (array) => {
+  let result = [];
+
+  for (const value of array) {
+    if (Array.isArray(value)) {
+      result = result.concat(flatten(value)); // manual combination
+    } else {
+      result.push(value);
+    }
+  }
+
+  return result;
+};
+
+console.log(flatten(arr1)); // [1, 2, 3, 4]
+
+//✅ 3. Flatten Without Recursion and Without Extra Reverse
+
+//More manual control:
+
+let arr2 = [1, [2, [3, [4]]]];
+
+function flatten(array) {
+  let result = [];
+  let stack = [{ items: array, index: 0 }];
+
+  while (stack.length > 0) {
+    let frame = stack[stack.length - 1];
+
+    // if we reached end of this sub-array, pop it
+    if (frame.index >= frame.items.length) {
+      stack.pop();
+      continue;
+    }
+
+    let value = frame.items[frame.index];
+    frame.index++;
+
+    if (Array.isArray(value)) {
+      // add new frame for this nested array
+      stack.push({ items: value, index: 0 });
+    } else {
+      result.push(value);
+    }
+  }
+
+  return result;
+}
+
+console.log(flatten(arr2)); // [1, 2, 3, 4]
